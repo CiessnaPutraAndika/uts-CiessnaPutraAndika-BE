@@ -1,24 +1,22 @@
-import Customer from "../models/CustomerModels.js";
 import Menu from "../models/MenuModels.js";
-import Order from "../models/OrderModels.js";
+import Users from "../models/UsersModels.js";
 
 export const getAllMenu = async (req, res) => {
-    try{
+    try {
+        console.log('Fetching menu with included Users...');
         const menu = await Menu.findAll({
             include: [
                 {
-                    model: Customer,
-                    as: "Customer",
-                },
-                {
-                    model: Order,
-                    as: "Order",
+                    model: Users,
+                    as: "Users", // Ensure this matches the alias in the association
                 },
             ],
         });
-        res.status(200).json(menu)
-    } catch(error){
-        res.status(500).json({error: error.massage, message: "terjadi kesalahan saat getAllMenu"})
+        console.log('Menu fetched successfully:', menu);
+        res.status(200).json(menu);
+    } catch (error) {
+        console.error('Error in getAllMenu:', error);
+        res.status(500).json({ error: error.message, message: "terjadi kesalahan saat getAllMenu" });
     }
 };
 
@@ -28,12 +26,8 @@ export const getMenuById = async (req, res) => {
         const menu = await Menu.findByPk(id, {
             include: [
                 {
-                    model: Customer,
-                    as: "Menu",
-                },
-                {
-                    model: Order,
-                    as: "Order",
+                    model: Users,
+                    as: "Users",
                 },
             ],
         }); // Menggunakan findByPk untuk mencari berdasarkan primary key
@@ -48,15 +42,15 @@ export const getMenuById = async (req, res) => {
 
 export const createMenu = async (req, res) => {
     try{
-        const { menu_name, description, harga, gambar, CustomerId, OrderId } = req.body;
-        const menu = await Menu.create({menu_name, description, harga, gambar, CustomerId: CustomerId, OrderId: OrderId});
+        const { menu_name, description, harga, gambar, UserId } = req.body;
+        const menu = await Menu.create({menu_name, description, harga, gambar, UserId: UserId});
 
-        if (OrderId) {
-            const orderExists = await Order.findByPk(OrderId);
-            if (!orderExists) {
-                return res.status(400).json({ error: "OrderId does not exist", message: "gagal membuat create karena order kontol" });
-            }
-        }
+        // if (OrderId) {
+        //     const orderExists = await Order.findByPk(OrderId);
+        //     if (!orderExists) {
+        //         return res.status(400).json({ error: "OrderId does not exist", message: "gagal create karena order" });
+        //     }
+        // }
 
         res.status(200).json(menu);
     }catch(error){
@@ -67,8 +61,8 @@ export const createMenu = async (req, res) => {
 export const updateMenu = async (req, res) => {
     try{
         const { id } = req.params;
-        const { menu_name, description, harga, gambar, CustomerId, OrderId } = req.body;
-        const [updated] = await Menu.update({ menu_name, description, harga, gambar, CustomerId: CustomerId, OrderId: OrderId }, { where: { id } });
+        const { menu_name, description, harga, gambar, UserId } = req.body;
+        const [updated] = await Menu.update({ menu_name, description, harga, gambar, UserId: UserId }, { where: { id } });
         const updatedMenu = await Menu.findByPk(id);
         // JIKA TIDAK ADA YANG TERUPDATE MAKA AKAN ERROR
         if (updated === 0){

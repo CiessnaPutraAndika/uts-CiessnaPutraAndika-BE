@@ -19,6 +19,7 @@ const Order = db.define(
         status: {
             type: DataTypes.STRING,
             allowNull: false,
+            defaultValue: "Pending",
         }
     }, 
     {

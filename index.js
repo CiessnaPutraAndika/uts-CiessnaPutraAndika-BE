@@ -1,7 +1,9 @@
 import db from './utils/connection.js';
 import './models/OrderModels.js';
-import './models/CustomerModels.js';
-import './models/TableModels.js';
+import './models/AdminModels.js';
+import './models/DaftarModels.js';
+import './models/MenuModels.js';
+import './models/TransaksiModels.js';
 import "./models/index.js"
 import express from "express"
 import bodyParser from "body-parser"

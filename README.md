@@ -3,56 +3,39 @@ management restaurant yang berfungsi untuk memanage sebuah customer, order, tran
 
 # DESKRIPSI CASE
 dalam project ini memiliki 3 Entitas utama yang berhubungan satu sama lain :
-1.Meja (Table): Meja yang tersedia di restoran.
-2.Pelanggan (Customer): Pelanggan yang memesan meja.
-3.Menu: Menu makanan dan minuman yang dipilih oleh pelanggan.
-4.Pesanan (Order): Pesanan makanan dan minuman yang diorder oleh pelanggan.
-5.Transaksi (Pembayaran): Transaksi yang dilakukan pelanggan.
+1. Admin : Admin atau kasir dari case management order.
+
+2. Order : Customer yang ingin melakukan order.
+
+3. daftarMenu : List menu yang tersedia.
+
+4. menuPesanan : Menu pesanan yang telah dipesan.
+
+5. Transaksi : Transaksi pembayaran antara customer dan kasir.
 
 # RELASI ANTAR ENTITAS
-1.Meja ke Pelanggan: Setiap meja bisa dipesan oleh satu pelanggan, tetapi tidak setiap waktu.
-    Relasi: One-to-One
+1. Admin ke Menu : Admin dapat melihat banyak pesanan menu yang telah dipesan. ( Relasi: one-to-many ).
 
-2.Pelanggan ke Menu : Setiap pelanggan bisa melihat beberapa menu untuk dipesan.
-    Relasi: One-to-Many
+2. Admin ke Pembayaran : Admin dapat melakukan banyak transaksi pembayaran. ( Relasi: one-to-many ).
 
-3.Pelanggan ke Pesanan(Order) : Customer dapat memesan banyak Orderan
-    Relasi: One-to-Many
+3. Order ke Pembayaran : Order dapat melakukan hanya dengan satu kali transaksi pembayaran. ( Relasi: one-to-one ).
 
-4.Pesanan(Order) ke Menu: Dalam satu kali pesanan dapat memesan banyak menu.
-    Relasi: One-to-Many
+4. Order ke daftarMenu : Saat Order dapat melihat banyak daftar menu. ( Relasi: one-to-many ).
 
-5.Pesanan(Order) ke Meja: Banyaknya setiap pesanan terkait dengan satu meja yang dipesan oleh pelanggan.
-    Relasi: Many-to-One
-
-6.Pesanan(Order) ke Customer: Banyaknya setiap pesanan terkait dengan satu pelanggan.
-    Relasi: Many-to-One
-
-7.Customer ke Transaksi: Setiap customer wajib membayar atau melakukan transaksi pesanan yang di pesan.
-    Relasi: One-to-One
+5. Admin ke daftarMenu : Dan Admin juga dapat melihat banyak daftar menu. ( Relasi: one-to-many ).
     
 
 PROJECT INI DIBUAT UNTUK TUGAS BACKEND EXPRESS JS MENGGUNAKAN ORM SEQUELIZE DAN SISTEM CRUD
 
-# HASIL DARI DB YANG DIBUAT
-
-### CUSTOMER
-<img src="./img/pelanggan.jpg">
-
-### TABLE(MEJA)
-<img src="./img/meja.jpg">
-
-### ORDER
-<img src="./img/pesanan.jpg">
-
-### MENU
-<img src="./img/menu.jpg">
-
-### TRANSAKSI
-<img src="./img/payment.jpg">
-
 # UML
-<img src="./img/5table.jpg">
-<img src="./img/5erd.jpg">
+UML (Unified Modeling Language) adalah bahasa visual yang digunakan untuk membuat diagram dan model yang mewakili sistem software. UML membantu software developer, engineer, dan stakeholders lain untuk berkomunikasi dan berkolaborasi selama proses pengembangan software
+
+### CLASS DIAGRAM
+Class diagram atau diagram kelas adalah salah satu jenis diagram struktur pada UML yang menggambarkan dengan jelas struktur serta deskripsi class, atribut, metode, dan hubungan dari setiap objek.
+<img src="./img/lastdiagram.jpg">
+
+### ERD
+ERD adalah kepanjangan dari entity relationship diagram. ERD memvisualisasikan hubungan dari seluruh entitas seperti orang, benda, atau konsep dalam sebuah database serta atribut dari entitas tersebut.
+<img src="./img/lasterd.jpg">
 
 # COPYRIGHT BY © cirss_
